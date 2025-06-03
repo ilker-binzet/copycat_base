@@ -120,13 +120,24 @@ class ClipboardRepositoryCloudImpl implements ClipboardRepository {
   }
 
   @override
-  FailureOr<ClipboardItem?> getLatest() {
-    throw UnimplementedError();
+  FailureOr<ClipboardItem?> getLatest() async {
+    try {
+      final result = await remote.getLatest();
+      final decrypted = await result?.decrypt();
+      return Right(decrypted);
+    } catch (e) {
+      return Left(Failure.fromException(e));
+    }
   }
 
   @override
-  FailureOr<void> decryptPending() {
-    throw UnimplementedError();
+  FailureOr<void> decryptPending() async {
+    try {
+      await remote.decryptPending();
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure.fromException(e));
+    }
   }
 }
 
