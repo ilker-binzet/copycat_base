@@ -1,5 +1,5 @@
 name: copycat_base
-description: "A new Flutter package project."
+description: "Core logic and data layer for the CopyCat Clipboard app."
 version: 0.0.1
 homepage: https://github.com/raj457036/copycat_base
 publish_to: none
@@ -79,4 +79,3 @@ dependency_overrides:
   firebase_core_platform_interface: ^5.1.0
   screen_retriever: ^0.2.0
 
-# flutter:

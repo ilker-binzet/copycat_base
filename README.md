@@ -14,6 +14,10 @@ This package provides the core logic used by the [CopyCat Clipboard App](https:/
 - **lib/enums/** – Enum definitions used across the codebase.
 - **lib/l10n/** – Localization resources.
 - **lib/utils/** and **lib/widgets/** – Misc utilities and reusable widgets.
+ 
+## Architecture
+
+This package follows a layered design with domain models, repository interfaces and BLoC-based state management. Data sources provide local Isar storage and optional Google Drive sync.
 
 ## Dependency injection
 
@@ -36,6 +40,14 @@ Future<void> main() async {
 2. `OfflinePersistanceCubit` converts captured `ClipItem`s into `ClipboardItem` models and stores them in the local Isar database through the repository layer. Manual paste actions mark the item with `userIntent`.
 3. `SyncManagerCubit` periodically synchronises local data with the remote source through `SyncRepository`. It downloads remote changes, uploads local ones and updates `SyncStatus` with the last sync time.
 4. Additional cubits such as `CloudPersistanceCubit` or `DriveSetupCubit` handle uploading/downloading of files when cloud features are enabled.
+ 
+## Usage
+
+Add `copycat_base` as a dependency and initialise the modules before using any repositories or cubits.
+```dart
+await initModules();
+final repo = getIt<ClipboardRepository>();
+```
 
 ## Development
 
