@@ -56,7 +56,7 @@ class AppConfig with _$AppConfig, IsarIdMixin {
     @Enumerated(EnumType.name)
     DynamicSchemeVariant themeVariant,
 
-    // Exprimental
+    // Experimental
     @Default(false) bool enableDragNDrop,
 
     //? Local App States
