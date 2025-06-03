@@ -85,9 +85,11 @@ class GoogleDriveService implements DriveService {
       final fileName = "${getId()}_${item.fileName}$ext";
       final filePath = p.join(rootDir, fileName);
 
-      final file = io.File(filePath).openWrite();
+      final sink = io.File(filePath).openWrite();
 
-      await file.addStream(media.stream);
+      await sink.addStream(media.stream);
+      await sink.close();
+
       return Right(item.copyWith(localPath: filePath)..applyId(item));
     } catch (e) {
       logger.e(e, error: e);
