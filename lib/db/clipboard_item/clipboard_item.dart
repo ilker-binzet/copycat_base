@@ -201,8 +201,8 @@ class ClipboardItem with _$ClipboardItem, IsarIdMixin {
   /// Removes the associated file.
   Future<void> cleanUp() async {
     try {
-      if (localPath != null && type == ClipItemType.file ||
-          type == ClipItemType.media) {
+      if (localPath != null &&
+          (type == ClipItemType.file || type == ClipItemType.media)) {
         final file = File(localPath!);
         if (await file.exists()) {
           await file.delete();
